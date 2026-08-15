@@ -1,0 +1,11 @@
+name = "donbasilo-stock"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "public"
+
+# Cette section sera complétée quand tu créeras la base avec :
+#   wrangler d1 create donbasilo-db
+# Cloudflare te donnera un "database_id" à coller ci-dessous.
+[[d1_databases]]
+binding = "DB"
+database_name = "donbasilo-db"
+database_id = "A_REMPLACER_PLUS_TARD"

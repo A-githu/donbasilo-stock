@@ -1,0 +1,10 @@
+{
+  "name": "donbasilo-stock",
+  "version": "1.0.0",
+  "description": "Plateforme de gestion de stock - Don Basilo",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public"
+  }
+}

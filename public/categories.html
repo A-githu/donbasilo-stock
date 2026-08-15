@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catégories — Don Basilo</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="nav"></div>
+
+  <header class="page-header">
+    <h1>Catégories</h1>
+    <p>Organisation des produits par famille</p>
+  </header>
+
+  <main>
+    <div class="barre-outils">
+      <button class="btn" id="btn-nouvelle-categorie" hidden>+ Nouvelle catégorie</button>
+    </div>
+
+    <div class="carte">
+      <table>
+        <thead>
+          <tr><th>Nom</th><th>Description</th><th></th></tr>
+        </thead>
+        <tbody id="corps-categories"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <div class="fond-modale" id="modale-categorie" hidden>
+    <div class="contenu-modale">
+      <h3 id="titre-modale-categorie">Nouvelle catégorie</h3>
+      <form id="form-categorie">
+        <input type="hidden" id="categorie-id">
+
+        <label for="categorie-nom">Nom</label>
+        <input type="text" id="categorie-nom" required>
+
+        <label for="categorie-description">Description (optionnel)</label>
+        <textarea id="categorie-description" rows="2"></textarea>
+
+        <p id="message-erreur-categorie" class="message-erreur" hidden></p>
+
+        <div class="actions-modale">
+          <button type="button" class="btn btn-secondaire" id="btn-annuler-categorie">Annuler</button>
+          <button type="submit" class="btn">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/categories.js"></script>
+</body>
+</html>

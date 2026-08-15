@@ -1,0 +1,315 @@
+:root {
+  --bleu: #1a3c6e;
+  --bleu-clair: #2f5aa0;
+  --blanc: #ffffff;
+  --fond: #f4f6fa;
+  --gris-texte: #444;
+  --gris-bordure: #e0e3ea;
+  --vert: #2e7d32;
+  --orange: #ef6c00;
+  --rouge: #c62828;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--fond);
+  color: #1a1a1a;
+}
+
+a { color: var(--bleu); text-decoration: none; }
+
+/* ---------- Navigation ---------- */
+#nav {
+  background: var(--bleu);
+  color: var(--blanc);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.nav-liens {
+  display: flex;
+  gap: 1.2rem;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.nav-liens a {
+  color: var(--blanc);
+  opacity: 0.8;
+  font-size: 0.95rem;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-liens a:hover,
+.nav-liens a.actif {
+  opacity: 1;
+  border-bottom-color: var(--blanc);
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.nav-user em { opacity: 0.75; font-style: normal; }
+
+.nav-user button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: var(--blanc);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.nav-user button:hover { background: rgba(255,255,255,0.15); }
+
+/* ---------- Layout général ---------- */
+header.page-header {
+  background: var(--bleu);
+  color: var(--blanc);
+  padding: 1.5rem 2rem;
+}
+
+header.page-header h1 { margin: 0; font-size: 1.6rem; }
+header.page-header p { margin: 0.2rem 0 0; opacity: 0.85; }
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h2 { color: var(--bleu); }
+
+/* ---------- Cartes / KPI ---------- */
+.grille-kpi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.carte-kpi {
+  background: var(--blanc);
+  border: 1px solid var(--gris-bordure);
+  border-radius: 10px;
+  padding: 1.2rem;
+}
+
+.carte-kpi .valeur {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--bleu);
+}
+
+.carte-kpi .label {
+  font-size: 0.85rem;
+  color: var(--gris-texte);
+  margin-top: 0.3rem;
+}
+
+.carte-kpi.alerte .valeur { color: var(--rouge); }
+
+/* ---------- Tableaux ---------- */
+.carte {
+  background: var(--blanc);
+  border: 1px solid var(--gris-bordure);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--gris-bordure);
+}
+
+th {
+  color: var(--bleu);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+tr:hover td { background: #fafbfd; }
+
+/* ---------- Badges statut ---------- */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-disponible { background: #e8f5e9; color: var(--vert); }
+.badge-faible { background: #fff3e0; color: var(--orange); }
+.badge-rupture { background: #ffebee; color: var(--rouge); }
+
+/* ---------- Formulaires ---------- */
+.barre-outils {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.barre-outils input,
+.barre-outils select {
+  padding: 0.5rem;
+  border: 1px solid var(--gris-bordure);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+  display: block;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.55rem;
+  border: 1px solid var(--gris-bordure);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  background: var(--bleu);
+  color: var(--blanc);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn:hover { background: var(--bleu-clair); }
+
+.btn-secondaire {
+  background: var(--blanc);
+  color: var(--bleu);
+  border: 1px solid var(--bleu);
+}
+
+.btn-danger { background: var(--rouge); }
+.btn-danger:hover { background: #a31f1f; }
+
+.btn-petit { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+
+.actions-cellule { display: flex; gap: 0.4rem; }
+
+/* ---------- Modale ---------- */
+.fond-modale {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+
+.fond-modale[hidden] { display: none; }
+
+.contenu-modale {
+  background: var(--blanc);
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.contenu-modale h3 { margin-top: 0; color: var(--bleu); }
+
+.actions-modale {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+/* ---------- Messages ---------- */
+.message-erreur {
+  color: var(--rouge);
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+}
+
+.message-info {
+  background: #e3f2fd;
+  color: var(--bleu);
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Page de connexion ---------- */
+.page-connexion {
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+.carte-formulaire {
+  background: var(--blanc);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-formulaire button {
+  margin-top: 1.2rem;
+  padding: 0.7rem;
+  background: var(--bleu);
+  color: var(--blanc);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.carte-formulaire button:hover { background: var(--bleu-clair); }

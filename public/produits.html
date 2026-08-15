@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produits — Don Basilo</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="nav"></div>
+
+  <header class="page-header">
+    <h1>Produits</h1>
+    <p>Afficheurs, chargeurs, batteries, accessoires...</p>
+  </header>
+
+  <main>
+    <div class="barre-outils">
+      <input type="text" id="filtre-recherche" placeholder="Rechercher un produit, une marque, un modèle...">
+      <select id="filtre-categorie"><option value="">Toutes les catégories</option></select>
+      <select id="filtre-statut">
+        <option value="">Tous les statuts</option>
+        <option value="disponible">Disponible</option>
+        <option value="faible">Stock faible</option>
+        <option value="rupture">Rupture</option>
+      </select>
+      <button class="btn" id="btn-nouveau-produit" hidden>+ Ajouter un produit</button>
+    </div>
+
+    <div class="carte">
+      <table>
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Catégorie</th>
+            <th>Marque / Modèle</th>
+            <th>Prix de vente</th>
+            <th>Quantité</th>
+            <th>Statut</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="corps-produits"></tbody>
+      </table>
+      <p id="msg-vide-produits" class="message-info" hidden>Aucun produit ne correspond à votre recherche.</p>
+    </div>
+  </main>
+
+  <!-- Modale ajout / modification -->
+  <div class="fond-modale" id="modale-produit" hidden>
+    <div class="contenu-modale">
+      <h3 id="titre-modale-produit">Ajouter un produit</h3>
+      <form id="form-produit">
+        <input type="hidden" id="produit-id">
+
+        <label for="produit-nom">Nom du produit</label>
+        <input type="text" id="produit-nom" required>
+
+        <label for="produit-categorie">Catégorie</label>
+        <select id="produit-categorie" required></select>
+
+        <label for="produit-marque">Marque (ex : Samsung, iPhone...)</label>
+        <input type="text" id="produit-marque">
+
+        <label for="produit-modele">Modèle compatible</label>
+        <input type="text" id="produit-modele">
+
+        <label for="produit-prix-achat">Prix d'achat (FCFA)</label>
+        <input type="number" id="produit-prix-achat" min="0" step="1">
+
+        <label for="produit-prix-vente">Prix de vente (FCFA)</label>
+        <input type="number" id="produit-prix-vente" min="0" step="1" required>
+
+        <label for="produit-quantite">Quantité initiale</label>
+        <input type="number" id="produit-quantite" min="0" step="1">
+
+        <label for="produit-seuil">Seuil d'alerte</label>
+        <input type="number" id="produit-seuil" min="0" step="1" value="2">
+
+        <p id="message-erreur-produit" class="message-erreur" hidden></p>
+
+        <div class="actions-modale">
+          <button type="button" class="btn btn-secondaire" id="btn-annuler-produit">Annuler</button>
+          <button type="submit" class="btn">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/produits.js"></script>
+</body>
+</html>
