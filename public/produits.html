@@ -6,45 +6,47 @@
   <title>Produits — Don Basilo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <div id="nav"></div>
+<body data-page-title="Produits" data-page-subtitle="Afficheurs, chargeurs, batteries, accessoires...">
+  <div class="app-shell">
+    <div id="sidebar-backdrop"></div>
+    <aside id="sidebar"></aside>
 
-  <header class="page-header">
-    <h1>Produits</h1>
-    <p>Afficheurs, chargeurs, batteries, accessoires...</p>
-  </header>
+    <div class="app-main">
+      <header id="topbar"></header>
 
-  <main>
-    <div class="barre-outils">
-      <input type="text" id="filtre-recherche" placeholder="Rechercher un produit, une marque, un modèle...">
-      <select id="filtre-categorie"><option value="">Toutes les catégories</option></select>
-      <select id="filtre-statut">
-        <option value="">Tous les statuts</option>
-        <option value="disponible">Disponible</option>
-        <option value="faible">Stock faible</option>
-        <option value="rupture">Rupture</option>
-      </select>
-      <button class="btn" id="btn-nouveau-produit" hidden>+ Ajouter un produit</button>
+      <main class="page-content">
+        <div class="barre-outils">
+          <input type="text" id="filtre-recherche" placeholder="Rechercher un produit, une marque, un modèle...">
+          <select id="filtre-categorie"><option value="">Toutes les catégories</option></select>
+          <select id="filtre-statut">
+            <option value="">Tous les statuts</option>
+            <option value="disponible">Disponible</option>
+            <option value="faible">Stock faible</option>
+            <option value="rupture">Rupture</option>
+          </select>
+          <button class="btn" id="btn-nouveau-produit" hidden>+ Ajouter un produit</button>
+        </div>
+
+        <div class="carte">
+          <table>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Catégorie</th>
+                <th>Marque / Modèle</th>
+                <th>Prix de vente</th>
+                <th>Quantité</th>
+                <th>Statut</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="corps-produits"></tbody>
+          </table>
+          <p id="msg-vide-produits" class="message-info" hidden>Aucun produit ne correspond à votre recherche.</p>
+        </div>
+      </main>
     </div>
-
-    <div class="carte">
-      <table>
-        <thead>
-          <tr>
-            <th>Produit</th>
-            <th>Catégorie</th>
-            <th>Marque / Modèle</th>
-            <th>Prix de vente</th>
-            <th>Quantité</th>
-            <th>Statut</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="corps-produits"></tbody>
-      </table>
-      <p id="msg-vide-produits" class="message-info" hidden>Aucun produit ne correspond à votre recherche.</p>
-    </div>
-  </main>
+  </div>
 
   <!-- Modale ajout / modification -->
   <div class="fond-modale" id="modale-produit" hidden>

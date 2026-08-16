@@ -7,24 +7,65 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Don Basilo</h1>
-    <p>Connexion à la plateforme de gestion de stock</p>
-  </header>
+  <div class="login-shell">
 
-  <main class="page-connexion">
-    <form id="form-login" class="carte-formulaire">
-      <label for="email">Email</label>
-      <input type="email" id="email" required autocomplete="username">
+    <!-- Panneau gauche (dégradé bleu, masqué sur mobile) -->
+    <div class="login-panneau">
+      <div class="login-panneau-contenu">
+        <div class="login-logo-badge">DB</div>
+        <h1>Don Basilo<br>Gestion de stock</h1>
+        <p class="accroche">Suivez en temps réel les entrées, les sorties et les alertes de stock de votre boutique d'accessoires téléphoniques.</p>
 
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" required autocomplete="current-password">
+        <div class="login-feature-liste">
+          <div class="login-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Suivi automatique des quantités
+          </div>
+          <div class="login-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Alertes de rupture en temps réel
+          </div>
+          <div class="login-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Produits classés par catégories
+          </div>
+        </div>
+      </div>
 
-      <button type="submit">Se connecter</button>
+      <p class="login-copyright">© 2026 Don Basilo — Plateforme de gestion de stock</p>
+    </div>
 
-      <p id="message-erreur" class="message-erreur" hidden></p>
-    </form>
-  </main>
+    <!-- Panneau droit (formulaire) -->
+    <div class="login-droite">
+      <div style="width:100%; max-width:380px;">
+
+        <div class="login-mobile-badge">
+          <div class="login-logo-badge">DB</div>
+          <strong style="font-size:1.1rem;">Don Basilo</strong>
+        </div>
+
+        <div class="login-carte">
+          <h2>Connexion</h2>
+          <p class="sous-titre">Accédez à votre espace de gestion</p>
+
+          <form id="form-login">
+            <label for="email">Email</label>
+            <input type="email" id="email" required autocomplete="username" placeholder="votre@email.com">
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••">
+
+            <p id="message-erreur" class="message-erreur" hidden></p>
+
+            <button type="submit" class="btn" id="btn-connexion" style="width:100%; margin-top:1.4rem;">
+              Se connecter
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <script src="/js/login.js"></script>
 </body>

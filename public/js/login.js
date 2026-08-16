@@ -6,7 +6,11 @@ document.getElementById("form-login").addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const messageErreur = document.getElementById("message-erreur");
+  const btn = document.getElementById("btn-connexion");
   messageErreur.hidden = true;
+  const texteInitial = btn.textContent;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Connexion...';
 
   try {
     const response = await fetch("/api/auth/login", {
@@ -20,6 +24,8 @@ document.getElementById("form-login").addEventListener("submit", async (e) => {
     if (!response.ok) {
       messageErreur.textContent = data.error || "Une erreur est survenue.";
       messageErreur.hidden = false;
+      btn.disabled = false;
+      btn.textContent = texteInitial;
       return;
     }
 
@@ -32,5 +38,7 @@ document.getElementById("form-login").addEventListener("submit", async (e) => {
   } catch (err) {
     messageErreur.textContent = "Impossible de contacter le serveur.";
     messageErreur.hidden = false;
+    btn.disabled = false;
+    btn.textContent = texteInitial;
   }
 });

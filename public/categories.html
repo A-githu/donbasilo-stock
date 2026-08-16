@@ -6,28 +6,30 @@
   <title>Catégories — Don Basilo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <div id="nav"></div>
+<body data-page-title="Catégories" data-page-subtitle="Organisation des produits par famille">
+  <div class="app-shell">
+    <div id="sidebar-backdrop"></div>
+    <aside id="sidebar"></aside>
 
-  <header class="page-header">
-    <h1>Catégories</h1>
-    <p>Organisation des produits par famille</p>
-  </header>
+    <div class="app-main">
+      <header id="topbar"></header>
 
-  <main>
-    <div class="barre-outils">
-      <button class="btn" id="btn-nouvelle-categorie" hidden>+ Nouvelle catégorie</button>
+      <main class="page-content">
+        <div class="barre-outils">
+          <button class="btn" id="btn-nouvelle-categorie" hidden>+ Nouvelle catégorie</button>
+        </div>
+
+        <div class="carte">
+          <table>
+            <thead>
+              <tr><th>Nom</th><th>Description</th><th></th></tr>
+            </thead>
+            <tbody id="corps-categories"></tbody>
+          </table>
+        </div>
+      </main>
     </div>
-
-    <div class="carte">
-      <table>
-        <thead>
-          <tr><th>Nom</th><th>Description</th><th></th></tr>
-        </thead>
-        <tbody id="corps-categories"></tbody>
-      </table>
-    </div>
-  </main>
+  </div>
 
   <div class="fond-modale" id="modale-categorie" hidden>
     <div class="contenu-modale">

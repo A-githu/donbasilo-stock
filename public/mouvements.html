@@ -6,60 +6,62 @@
   <title>Mouvements de stock — Don Basilo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <div id="nav"></div>
+<body data-page-title="Mouvements de stock" data-page-subtitle="Entrées (réapprovisionnement) et sorties (ventes)">
+  <div class="app-shell">
+    <div id="sidebar-backdrop"></div>
+    <aside id="sidebar"></aside>
 
-  <header class="page-header">
-    <h1>Mouvements de stock</h1>
-    <p>Entrées (réapprovisionnement) et sorties (ventes)</p>
-  </header>
+    <div class="app-main">
+      <header id="topbar"></header>
 
-  <main>
-    <div class="carte">
-      <h2 id="titre-formulaire-mouvement">Enregistrer une vente</h2>
-      <form id="form-mouvement">
-        <label for="mouvement-produit">Produit</label>
-        <select id="mouvement-produit" required></select>
+      <main class="page-content">
+        <div class="carte">
+          <h2 class="titre-section" id="titre-formulaire-mouvement">Enregistrer une vente</h2>
+          <form id="form-mouvement">
+            <label for="mouvement-produit">Produit</label>
+            <select id="mouvement-produit" required></select>
 
-        <div id="zone-type-mouvement" hidden>
-          <label for="mouvement-type">Type de mouvement</label>
-          <select id="mouvement-type">
-            <option value="sortie">Sortie (vente)</option>
-            <option value="entree">Entrée (réapprovisionnement)</option>
+            <div id="zone-type-mouvement" hidden>
+              <label for="mouvement-type">Type de mouvement</label>
+              <select id="mouvement-type">
+                <option value="sortie">Sortie (vente)</option>
+                <option value="entree">Entrée (réapprovisionnement)</option>
+              </select>
+            </div>
+
+            <label for="mouvement-quantite">Quantité</label>
+            <input type="number" id="mouvement-quantite" min="1" step="1" required>
+
+            <label for="mouvement-motif">Motif (optionnel)</label>
+            <input type="text" id="mouvement-motif" placeholder="Ex : Vente client, Réception fournisseur...">
+
+            <p id="message-erreur-mouvement" class="message-erreur" hidden></p>
+            <p id="message-succes-mouvement" class="message-info" hidden></p>
+
+            <button type="submit" class="btn" style="margin-top:1rem;">Enregistrer</button>
+          </form>
+        </div>
+
+        <div class="barre-outils">
+          <select id="filtre-type-historique">
+            <option value="">Tous les mouvements</option>
+            <option value="entree">Entrées</option>
+            <option value="sortie">Sorties</option>
           </select>
         </div>
 
-        <label for="mouvement-quantite">Quantité</label>
-        <input type="number" id="mouvement-quantite" min="1" step="1" required>
-
-        <label for="mouvement-motif">Motif (optionnel)</label>
-        <input type="text" id="mouvement-motif" placeholder="Ex : Vente client, Réception fournisseur...">
-
-        <p id="message-erreur-mouvement" class="message-erreur" hidden></p>
-        <p id="message-succes-mouvement" class="message-info" hidden></p>
-
-        <button type="submit" class="btn" style="margin-top:1rem;">Enregistrer</button>
-      </form>
+        <div class="carte">
+          <h2 class="titre-section">Historique</h2>
+          <table>
+            <thead>
+              <tr><th>Produit</th><th>Type</th><th>Quantité</th><th>Motif</th><th>Par</th><th>Date</th></tr>
+            </thead>
+            <tbody id="corps-historique"></tbody>
+          </table>
+        </div>
+      </main>
     </div>
-
-    <div class="barre-outils">
-      <select id="filtre-type-historique">
-        <option value="">Tous les mouvements</option>
-        <option value="entree">Entrées</option>
-        <option value="sortie">Sorties</option>
-      </select>
-    </div>
-
-    <div class="carte">
-      <h2>Historique</h2>
-      <table>
-        <thead>
-          <tr><th>Produit</th><th>Type</th><th>Quantité</th><th>Motif</th><th>Par</th><th>Date</th></tr>
-        </thead>
-        <tbody id="corps-historique"></tbody>
-      </table>
-    </div>
-  </main>
+  </div>
 
   <script src="/js/app.js"></script>
   <script src="/js/mouvements.js"></script>

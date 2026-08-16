@@ -6,38 +6,40 @@
   <title>Tableau de bord — Don Basilo</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <div id="nav"></div>
+<body data-page-title="Tableau de bord" data-page-subtitle="Vue d'ensemble du stock de Don Basilo">
+  <div class="app-shell">
+    <div id="sidebar-backdrop"></div>
+    <aside id="sidebar"></aside>
 
-  <header class="page-header">
-    <h1>Tableau de bord</h1>
-    <p>Vue d'ensemble du stock de Don Basilo</p>
-  </header>
+    <div class="app-main">
+      <header id="topbar"></header>
 
-  <main>
-    <div id="grille-kpi" class="grille-kpi"></div>
+      <main class="page-content">
+        <div id="grille-kpi" class="grille-kpi"></div>
 
-    <div class="carte">
-      <h2>Produits à surveiller (stock faible ou rupture)</h2>
-      <table>
-        <thead>
-          <tr><th>Produit</th><th>Catégorie</th><th>Quantité</th><th>Seuil</th><th>Statut</th></tr>
-        </thead>
-        <tbody id="corps-alertes"></tbody>
-      </table>
-      <p id="msg-vide-alertes" class="message-info" hidden>Aucun produit en alerte pour le moment. 👍</p>
+        <div class="carte">
+          <h2 class="titre-section">Produits à surveiller (stock faible ou rupture)</h2>
+          <table>
+            <thead>
+              <tr><th>Produit</th><th>Catégorie</th><th>Quantité</th><th>Seuil</th><th>Statut</th></tr>
+            </thead>
+            <tbody id="corps-alertes"></tbody>
+          </table>
+          <p id="msg-vide-alertes" class="message-info" hidden>Aucun produit en alerte pour le moment. 👍</p>
+        </div>
+
+        <div class="carte">
+          <h2 class="titre-section">Dernières ventes</h2>
+          <table>
+            <thead>
+              <tr><th>Produit</th><th>Quantité</th><th>Vendu par</th><th>Date</th></tr>
+            </thead>
+            <tbody id="corps-ventes"></tbody>
+          </table>
+        </div>
+      </main>
     </div>
-
-    <div class="carte">
-      <h2>Dernières ventes</h2>
-      <table>
-        <thead>
-          <tr><th>Produit</th><th>Quantité</th><th>Vendu par</th><th>Date</th></tr>
-        </thead>
-        <tbody id="corps-ventes"></tbody>
-      </table>
-    </div>
-  </main>
+  </div>
 
   <script src="/js/app.js"></script>
   <script src="/js/dashboard.js"></script>

@@ -1,0 +1,117 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/auth/login",
+      "mountPath": "/api/auth",
+      "method": "POST",
+      "module": [
+        "api/auth/login.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/dashboard/stats",
+      "mountPath": "/api/dashboard",
+      "method": "GET",
+      "module": [
+        "api/dashboard/stats.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/categories/:id",
+      "mountPath": "/api/categories",
+      "method": "DELETE",
+      "module": [
+        "api/categories/[id].js:onRequestDelete"
+      ]
+    },
+    {
+      "routePath": "/api/categories/:id",
+      "mountPath": "/api/categories",
+      "method": "PUT",
+      "module": [
+        "api/categories/[id].js:onRequestPut"
+      ]
+    },
+    {
+      "routePath": "/api/produits/:id",
+      "mountPath": "/api/produits",
+      "method": "DELETE",
+      "module": [
+        "api/produits/[id].js:onRequestDelete"
+      ]
+    },
+    {
+      "routePath": "/api/produits/:id",
+      "mountPath": "/api/produits",
+      "method": "GET",
+      "module": [
+        "api/produits/[id].js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/produits/:id",
+      "mountPath": "/api/produits",
+      "method": "PUT",
+      "module": [
+        "api/produits/[id].js:onRequestPut"
+      ]
+    },
+    {
+      "routePath": "/api/categories",
+      "mountPath": "/api/categories",
+      "method": "GET",
+      "module": [
+        "api/categories/index.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/categories",
+      "mountPath": "/api/categories",
+      "method": "POST",
+      "module": [
+        "api/categories/index.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/mouvements",
+      "mountPath": "/api/mouvements",
+      "method": "GET",
+      "module": [
+        "api/mouvements/index.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/mouvements",
+      "mountPath": "/api/mouvements",
+      "method": "POST",
+      "module": [
+        "api/mouvements/index.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/produits",
+      "mountPath": "/api/produits",
+      "method": "GET",
+      "module": [
+        "api/produits/index.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/produits",
+      "mountPath": "/api/produits",
+      "method": "POST",
+      "module": [
+        "api/produits/index.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api",
+      "mountPath": "/api",
+      "method": "",
+      "middleware": [
+        "api/_middleware.js:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
