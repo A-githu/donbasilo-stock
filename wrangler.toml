@@ -8,4 +8,4 @@ pages_build_output_dir = "public"
 [[d1_databases]]
 binding = "DB"
 database_name = "donbasilo-db"
-database_id = "A_REMPLACER_PLUS_TARD"
+database_id = "dd05698c-44c9-424b-8117-1b96128ba1ab"
