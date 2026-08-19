@@ -1,16 +1,21 @@
 // functions/api/dashboard/stats.js
-// GET /api/dashboard/stats -> statistiques globales pour le tableau de bord
+// GET /api/dashboard/stats -> statistiques globales pour le tableau de bord (admin uniquement)
 
 import { jsonOk, statutStock } from "../../_shared/response-helpers.js";
+import { requireAdmin } from "../../_shared/auth-helpers.js";
 
 export async function onRequestGet(context) {
-  const { env, data } = context;
+  const refus = requireAdmin(context);
+  if (refus) return refus;
+
+  const { env } = context;
 
   const { results: produits } = await env.DB
     .prepare(`
       SELECT p.id, p.nom, p.quantite, p.seuil_alerte, p.prix_vente, c.nom as categorie_nom
       FROM produits p
       JOIN categories c ON c.id = p.categorie_id
+      WHERE p.actif = 1
     `)
     .all();
 

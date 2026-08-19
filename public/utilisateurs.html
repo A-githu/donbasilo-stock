@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilisateurs — Don Basilo</title>
+  <script>(function(){try{if(localStorage.getItem("donbasilo_theme")==="sombre"){document.documentElement.setAttribute("data-theme","sombre");}}catch(e){}})();</script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-page-title="Utilisateurs" data-page-subtitle="Comptes Administrateur et Vendeur">
+  <div class="app-shell">
+    <div id="sidebar-backdrop"></div>
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-content">
+        <div class="barre-outils">
+          <button class="btn" id="btn-nouvel-utilisateur">+ Nouvel utilisateur</button>
+        </div>
+
+        <div class="carte">
+          <table>
+            <thead>
+              <tr><th>Nom</th><th>Email</th><th>Rôle</th><th></th></tr>
+            </thead>
+            <tbody id="corps-utilisateurs"></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="fond-modale" id="modale-utilisateur" hidden>
+    <div class="contenu-modale">
+      <h3 id="titre-modale-utilisateur">Nouvel utilisateur</h3>
+      <form id="form-utilisateur">
+        <input type="hidden" id="utilisateur-id">
+
+        <label for="utilisateur-nom">Nom</label>
+        <input type="text" id="utilisateur-nom" required>
+
+        <label for="utilisateur-email">Email</label>
+        <input type="email" id="utilisateur-email" required>
+
+        <label for="utilisateur-role">Rôle</label>
+        <select id="utilisateur-role" required>
+          <option value="vendeur">Vendeur</option>
+          <option value="admin">Administrateur</option>
+        </select>
+
+        <label for="utilisateur-password" id="label-utilisateur-password">Mot de passe</label>
+        <input type="password" id="utilisateur-password" placeholder="Au moins 6 caractères">
+
+        <p id="message-erreur-utilisateur" class="message-erreur" hidden></p>
+
+        <div class="actions-modale">
+          <button type="button" class="btn btn-secondaire" id="btn-annuler-utilisateur">Annuler</button>
+          <button type="submit" class="btn">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/utilisateurs.js"></script>
+</body>
+</html>

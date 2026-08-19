@@ -12,7 +12,7 @@ export async function onRequestGet(context) {
   const produit = await env.DB
     .prepare(`
       SELECT p.id, p.nom, p.categorie_id, c.nom as categorie_nom, p.marque, p.modele_compatible,
-             p.prix_achat, p.prix_vente, p.quantite, p.seuil_alerte, p.image_url, p.date_creation
+             p.prix_achat, p.prix_vente, p.quantite, p.seuil_alerte, p.actif, p.image_url, p.date_creation
       FROM produits p
       JOIN categories c ON c.id = p.categorie_id
       WHERE p.id = ?

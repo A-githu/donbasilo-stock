@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS produits (
   prix_vente REAL NOT NULL,
   quantite INTEGER NOT NULL DEFAULT 0,
   seuil_alerte INTEGER NOT NULL DEFAULT 2,
+  actif INTEGER NOT NULL DEFAULT 1,
   image_url TEXT,
   date_creation TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (categorie_id) REFERENCES categories(id)

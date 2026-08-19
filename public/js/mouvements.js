@@ -7,13 +7,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (estAdminMouvements) {
     document.getElementById("zone-type-mouvement").hidden = false;
     document.getElementById("titre-formulaire-mouvement").textContent = "Enregistrer un mouvement de stock";
+    document.getElementById("carte-historique").hidden = false;
+    document.getElementById("barre-filtre-historique").hidden = false;
+    document.getElementById("filtre-type-historique").addEventListener("change", chargerHistorique);
+    await chargerHistorique();
   }
 
   await chargerListeProduitsMouvement();
-  await chargerHistorique();
 
   document.getElementById("form-mouvement").addEventListener("submit", soumettreMouvement);
-  document.getElementById("filtre-type-historique").addEventListener("change", chargerHistorique);
 });
 
 async function chargerListeProduitsMouvement() {
@@ -67,7 +69,7 @@ async function soumettreMouvement(e) {
     msgSucces.hidden = false;
     document.getElementById("form-mouvement").reset();
     await chargerListeProduitsMouvement();
-    await chargerHistorique();
+    if (estAdminMouvements) await chargerHistorique();
   } catch (err) {
     msgErreur.textContent = err.message;
     msgErreur.hidden = false;

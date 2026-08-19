@@ -1,6 +1,11 @@
 // public/js/dashboard.js
 
-renderNav("dashboard");
+const utilisateurDashboard = renderNav("dashboard");
+
+// Le tableau de bord (statistiques) est réservé à l'administrateur (cahier des charges 5.1 / 5.2)
+if (utilisateurDashboard && utilisateurDashboard.role !== "admin") {
+  window.location.href = "/produits.html";
+}
 
 async function chargerDashboard() {
   try {
@@ -59,4 +64,6 @@ async function chargerDashboard() {
   }
 }
 
-chargerDashboard();
+if (utilisateurDashboard && utilisateurDashboard.role === "admin") {
+  chargerDashboard();
+}

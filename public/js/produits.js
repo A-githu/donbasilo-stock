@@ -8,6 +8,7 @@ let categoriesCache = [];
 document.addEventListener("DOMContentLoaded", async () => {
   if (estAdmin) {
     document.getElementById("btn-nouveau-produit").hidden = false;
+    document.getElementById("case-inclure-desactives").hidden = false;
   }
 
   await chargerCategories();
@@ -16,6 +17,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("filtre-recherche").addEventListener("input", debounce(chargerProduits, 300));
   document.getElementById("filtre-categorie").addEventListener("change", chargerProduits);
   document.getElementById("filtre-statut").addEventListener("change", chargerProduits);
+  const caseInclureDesactives = document.getElementById("inclure-desactives");
+  if (caseInclureDesactives) caseInclureDesactives.addEventListener("change", chargerProduits);
 
   document.getElementById("btn-nouveau-produit").addEventListener("click", () => ouvrirModaleProduit());
   document.getElementById("btn-annuler-produit").addEventListener("click", fermerModaleProduit);
@@ -43,11 +46,13 @@ async function chargerProduits() {
   const q = document.getElementById("filtre-recherche").value.trim();
   const categorieId = document.getElementById("filtre-categorie").value;
   const statut = document.getElementById("filtre-statut").value;
+  const caseInclureDesactives = document.getElementById("inclure-desactives");
 
   const params = new URLSearchParams();
   if (q) params.set("q", q);
   if (categorieId) params.set("categorie_id", categorieId);
   if (statut) params.set("statut", statut);
+  if (estAdmin && caseInclureDesactives && caseInclureDesactives.checked) params.set("inclure_desactives", "1");
 
   try {
     const produits = await apiFetch("/produits?" + params.toString());
@@ -62,8 +67,8 @@ async function chargerProduits() {
     msgVide.hidden = true;
 
     corps.innerHTML = produits.map(p => `
-      <tr>
-        <td>${p.nom}</td>
+      <tr style="${p.actif === 0 ? "opacity:0.55;" : ""}">
+        <td>${p.nom} ${p.actif === 0 ? '<span class="badge badge-rupture">Désactivé</span>' : ""}</td>
         <td>${p.categorie_nom}</td>
         <td>${[p.marque, p.modele_compatible].filter(Boolean).join(" — ") || "—"}</td>
         <td>${formatPrix(p.prix_vente)}</td>
@@ -72,6 +77,10 @@ async function chargerProduits() {
         <td class="actions-cellule">
           ${estAdmin ? `
             <button class="btn btn-secondaire btn-petit" onclick="ouvrirModaleProduit(${p.id})">Modifier</button>
+            ${p.actif === 0
+              ? `<button class="btn btn-petit" onclick="reactiverProduit(${p.id})">Réactiver</button>`
+              : `<button class="btn btn-secondaire btn-petit" onclick="desactiverProduit(${p.id}, '${p.nom.replace(/'/g, "\\'")}')">Désactiver</button>`
+            }
             <button class="btn btn-danger btn-petit" onclick="supprimerProduit(${p.id}, '${p.nom.replace(/'/g, "\\'")}')">Supprimer</button>
           ` : ""}
         </td>
@@ -147,8 +156,27 @@ async function soumettreProduit(e) {
   }
 }
 
+async function desactiverProduit(id, nom) {
+  if (!confirm(`Désactiver "${nom}" ? Il ne sera plus visible ni vendable par le vendeur, mais reste consultable par l'admin.`)) return;
+  try {
+    await apiFetch(`/produits/${id}/desactiver`, { method: "POST" });
+    chargerProduits();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+async function reactiverProduit(id) {
+  try {
+    await apiFetch(`/produits/${id}/activer`, { method: "POST" });
+    chargerProduits();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
 async function supprimerProduit(id, nom) {
-  if (!confirm(`Supprimer définitivement "${nom}" ? Cette action est irréversible.`)) return;
+  if (!confirm(`Supprimer définitivement "${nom}" ? Cette action est irréversible. Préférez "Désactiver" si vous voulez pouvoir revenir en arrière.`)) return;
   try {
     await apiFetch(`/produits/${id}`, { method: "DELETE" });
     chargerProduits();

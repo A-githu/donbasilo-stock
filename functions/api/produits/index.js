@@ -1,5 +1,5 @@
 // functions/api/produits/index.js
-// GET  /api/produits?q=...&categorie_id=...&statut=disponible|faible|rupture
+// GET  /api/produits?q=...&categorie_id=...&statut=disponible|faible|rupture&inclure_desactives=1
 // POST /api/produits   -> crée un produit (admin uniquement)
 
 import { jsonOk, jsonError, statutStock } from "../../_shared/response-helpers.js";
@@ -11,15 +11,21 @@ export async function onRequestGet(context) {
   const q = url.searchParams.get("q");
   const categorieId = url.searchParams.get("categorie_id");
   const statutFiltre = url.searchParams.get("statut");
+  const inclureDesactives = url.searchParams.get("inclure_desactives") === "1";
 
   let sql = `
     SELECT p.id, p.nom, p.categorie_id, c.nom as categorie_nom, p.marque, p.modele_compatible,
-           p.prix_achat, p.prix_vente, p.quantite, p.seuil_alerte, p.image_url, p.date_creation
+           p.prix_achat, p.prix_vente, p.quantite, p.seuil_alerte, p.actif, p.image_url, p.date_creation
     FROM produits p
     JOIN categories c ON c.id = p.categorie_id
     WHERE 1=1
   `;
   const bindings = [];
+
+  // Le vendeur ne voit jamais les produits désactivés. L'admin peut choisir de les inclure.
+  if (data.user.role !== "admin" || !inclureDesactives) {
+    sql += " AND p.actif = 1";
+  }
 
   if (q) {
     sql += " AND (p.nom LIKE ? OR p.marque LIKE ? OR p.modele_compatible LIKE ?)";
@@ -74,8 +80,8 @@ export async function onRequestPost(context) {
 
   const result = await env.DB
     .prepare(`
-      INSERT INTO produits (nom, categorie_id, marque, modele_compatible, prix_achat, prix_vente, quantite, seuil_alerte, image_url)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO produits (nom, categorie_id, marque, modele_compatible, prix_achat, prix_vente, quantite, seuil_alerte, actif, image_url)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
     `)
     .bind(
       nom.trim(),

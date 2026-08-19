@@ -1,13 +1,19 @@
 // functions/api/mouvements/index.js
-// GET  /api/mouvements?produit_id=...&type=entree|sortie   -> historique des mouvements
+// GET  /api/mouvements?produit_id=...&type=entree|sortie   -> historique des mouvements (admin uniquement)
 // POST /api/mouvements                                      -> enregistre une entrée ou une sortie
 //      Body : { produit_id, type: "entree"|"sortie", quantite, motif }
 //      -> Met à jour automatiquement la quantité du produit concerné.
 //      -> Un "vendeur" ne peut enregistrer que des sorties (ventes).
+//      -> Impossible d'enregistrer un mouvement sur un produit désactivé.
 
 import { jsonOk, jsonError } from "../../_shared/response-helpers.js";
+import { requireAdmin } from "../../_shared/auth-helpers.js";
 
 export async function onRequestGet(context) {
+  // Consulter l'historique complet est réservé à l'administrateur (cahier des charges 5.1 / 5.2)
+  const refus = requireAdmin(context);
+  if (refus) return refus;
+
   const { env, request } = context;
   const url = new URL(request.url);
   const produitId = url.searchParams.get("produit_id");
@@ -60,11 +66,12 @@ export async function onRequestPost(context) {
   }
 
   const produit = await env.DB
-    .prepare("SELECT id, quantite FROM produits WHERE id = ?")
+    .prepare("SELECT id, quantite, actif FROM produits WHERE id = ?")
     .bind(produit_id)
     .first();
 
   if (!produit) return jsonError("Produit introuvable.", 404);
+  if (!produit.actif) return jsonError("Ce produit est désactivé, aucun mouvement n'est possible.", 409);
 
   if (type === "sortie" && produit.quantite < quantite) {
     return jsonError(`Stock insuffisant (quantité disponible : ${produit.quantite}).`, 409);
